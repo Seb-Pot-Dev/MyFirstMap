@@ -17,20 +17,34 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-// Créer un marqueur aux coordonnées [48.583328, 7.75] et l'ajouter à la carte
-var marker1 = L.marker([48.583328, 7.75]).addTo(map);
+// ESSAI simple
+  // Créer des marqueurs test et les ajouter à la carte
+  var marker1 = L.marker([48.583328, 7.75]).addTo(map);
+  var marker2 = L.marker([48.5849, 7.7526]).addTo(map);
+  // Créer un popup pour le marker1 et le marker2
+  marker1.bindPopup("<b>Hello world!</b><br>I am a popup.");
+  marker2.bindPopup("<b>Hello world!</b><br>I am another popup.");
 
-var marker2 = L.marker([48.5849, 7.7526]).addTo(map);
+//ESSAI tableau
 
-// Créer un popup pour le marker1
-marker1.bindPopup("<b>Hello world!</b><br>I am a popup.");
+  // Créer un tableau multidimensionnel avec des coordonnées de test
+  const markersData = [  ["Point 1", "Description du point 1", 48.584918, 7.742130],
+  ["Point 2", "Description du point 2", 48.585046, 7.750775],
+  ["Point 3", "Description du point 3", 48.583492, 7.759014]
+];
 
-// Créer un popup pour le marker2
-marker2.bindPopup("<b>Hello world!</b><br>I am another popup.");
+// Parcourir le tableau et créer des marqueurs pour chaque élément
+for (let i = 0; i < markersData.length; i++) {
+  const name = markersData[i][0];
+  const description = markersData[i][1];
+  const lat = markersData[i][2];
+  const lng = markersData[i][3];
 
+  const marker = L.marker([lat, lng]).addTo(map);
+  marker.bindPopup(`<b>${name}</b><br>${description}`).openPopup();
+}
 
 //Créer un popup lorsque l'on clique sur un endroit non marked de la map et indique les coordonnées
-
     //stockage de la fonction popup() de Leaflet dans la variable popup
     var popup = L.popup();
 
@@ -74,7 +88,7 @@ var myPolygon = L.polygon(polygonCoords, {
 /* ---- AJOUT DE LIEUX (en session) ------- */
 
 // Définir la classe "Spots"
-class Spots {
+class Spot {
     constructor(name, description, lat, lng) {
       this.name = name;
       this.description = description;
@@ -97,10 +111,10 @@ class Spots {
     const lng = parseFloat(document.getElementById('lng').value);
   
 
-//Si le point est placé dans le polygon de l'agglo de Strasbourg
-    if (myPolygon.contains([lat, lng])) {
+// //Si le point est placé dans le polygon de l'agglo de Strasbourg
+    // // if (myPolygon.contains([lat, lng])) {
     // Créer un nouvel objet de spots
-    const spot = new Spots(name, description, lat, lng);
+    const spot = new Spot(name, description, lat, lng);
   
     // Ajouter le spot au tableau
     spots.push(spot);
@@ -111,10 +125,11 @@ class Spots {
     // Ajouter des informations au marqueur
     marker.bindPopup(`<b>${name}</b><br>${description}`).openPopup();
   }
-  else {
-    alert('Le lieu doit être situé dans agglomération Strasbourgeoise');
-  }
-});
+  // // else {
+  // //   alert('Le lieu doit être situé dans agglomération Strasbourgeoise');
+  // // }
+// // }
+);
 
     //afficher le tableau de spots dans la console
     console.log(spots); 
