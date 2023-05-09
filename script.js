@@ -30,7 +30,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   // Créer un tableau multidimensionnel avec des coordonnées de test
   const markersData = [  ["Point 1", "Description du point 1", 48.584918, 7.742130],
   ["Point 2", "Description du point 2", 48.585046, 7.750775],
-  ["Point 3", "Description du point 3", 48.583492, 7.759014]
+  ["Point 3", "Description du point 3", 48.583492, 7.759014],
+  ["Point 4", "Description du point 4", 48.583462, 7.752014],
+  ["Point 5", "Description du point 5", 48.583422, 7.755014]
 ];
 
 // Parcourir le tableau et créer des marqueurs pour chaque élément
